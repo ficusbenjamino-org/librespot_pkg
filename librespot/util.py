@@ -37,6 +37,8 @@ def random_hex_string(length: int):
     return bytes_to_hex(buffer)
 
 
+
+
 class Base62:
     standard_base = 256
     target_base = 62
@@ -115,3 +117,8 @@ class Base62:
     class CharacterSets:
         gmp = b'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
         inverted = b'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+_base62 = Base62.create_instance_with_inverted_character_set()
+
+def gid_to_base62(gid: bytes) -> str:
+    return _base62.encode(gid, 22).decode()
